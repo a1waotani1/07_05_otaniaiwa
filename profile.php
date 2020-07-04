@@ -35,6 +35,7 @@ $stmt->close();
     <div class="header-img">
         <nav class="navtop">
             <div>
+                <?php var_dump($_SESSION); ?>
                 <h1>travelist.</h1>
                 <a href="profile.php"><i class="fas fa-user-circle"></i>プロフィール</a>
                 <a href="#"><i class="fas fa-plus-circle"></i></i>アップロード</a>

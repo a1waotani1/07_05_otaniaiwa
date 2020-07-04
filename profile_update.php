@@ -14,27 +14,27 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 if (mysqli_connect_errno()) {
     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
-
+// ここでSESSION使うならPOSTでformの方からid渡さなくても良さそうですねー（なので削除しました）
 $id = $_SESSION['id'];
 $username = $_SESSION['name'];
 $newusername = $_POST['newusername'];
 
 
 if (isset($_POST['username'])) {
-    if ($stmt = $con->prepare("SELECT username FROM accounts WHERE username='$username'")); {
-        $stmt->execute();
-    }
-    $stmt->store_result();
-    if ($stmt->num_rows > 0) {
-        $stmt = $con->prepare("UPDATE accounts SET username='$newusername' WHERE id='$id'");
-        $status = $stmt->execute();
-    }
-} else {
-    echo 'error';
+    /**
+     * comment : ここはSELECTした後にUPDATEする必要はなくて、UPDATEのSQL文の中で
+     *  accountsの中でWHERE id='$id'としているので、更新すべき場所は特定できていますね
+     */
+    $stmt = $con->prepare("UPDATE accounts SET username='$newusername' WHERE id='$id'");
+    $stmt->execute();
 }
 
 if ($status = false) {
     echo 'error';
 } else {
+    /**
+     * ここはprofile.phpに戻ったときに更新された内容を表示したいので、SESSIONを書き換える必要があります！
+     */
+    $_SESSION['name'] = $newusername;
     header('Location: profile.php');
 }
