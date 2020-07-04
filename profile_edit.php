@@ -53,7 +53,7 @@ $stmt->close();
 
                     <tr>
                         <td>ユーザー名:</td>
-                        <td><input type="text" name="username" value="<?= $_SESSION['name'] ?>"></td>
+                        <td><?= $_SESSION['name'] ?></td>
                     </tr>
 
                     <tr>
@@ -71,7 +71,6 @@ $stmt->close();
                     <tr>
                         <td><input type="submit" id="submit2" value="保存する"></td>
                     </tr>
-                    <input type="hidden" name="id" value="<?= $_SESSION['id'] ?>">
                 </table>
             </form>
         </div>
