@@ -14,7 +14,10 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 if (mysqli_connect_errno()) {
     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
-// ここでSESSION使うならPOSTでformの方からid渡さなくても良さそうですねー（なので削除しました）
+/**
+ *  ここでSESSION['id']使うならformの方からPOSTでid渡さなくても良さそうですねー（なのでprofile_edit.phpから削除しました）
+ * 実はinput type=hiddenでPOSTする方法はユーザーが勝手に書き換えることも可能なので、SESSIONで実装しているこのやり方の方がいいかもしれませんねー。
+ * */
 $id = $_SESSION['id'];
 $username = $_SESSION['name'];
 $newusername = $_POST['newusername'];
